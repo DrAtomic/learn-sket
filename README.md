@@ -18,9 +18,7 @@ this project requires [[https://www.quicklisp.org/beta/][quicklisp]] so go ahead
 # Usage
 
 ```bash
-git clone git@github.com:DrAtomic/learn-sketch.git
-cd learn-sketch
-echo "(:tree \"$PWD\")" > ~/.config/common-lisp/source-registry.conf.d/1-learn-sketch.conf
+git clone git@github.com:DrAtomic/learn-sketch.git ~/quicklisp/local-projects/learn-sketch
 sbcl
 (ql:quickload "cl-art")
 ```
