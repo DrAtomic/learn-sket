@@ -2,6 +2,11 @@
 
 (in-package #:cl-art)
 
+(defun noise (list-of-offset)
+  "copied from https://git.sr.ht/~aerique/black-tie/tree/master/item/src/perlin-noise.lisp"
+  
+  '())
+
 (defun angle (x1 y1 x2 y2)
   "gets the angle from a line"
   (let ((a (atan (- y2 y1) (- x2 x1))))
@@ -18,7 +23,7 @@
 	(with-pen (make-pen :stroke +black+ :weight 1)
 	  (push-matrix)
 	  (translate (* x width-space) (* y height-space))
-	  (rotate (random 360))
+	  (rotate 30)
 	  (line 0 0 width-space 0)
 	  (pop-matrix))))))
 
