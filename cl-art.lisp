@@ -87,10 +87,12 @@
 
 (defun make-grid (width height number-of-elm)
   (let* ((width-space (/ width number-of-elm))
-	 (height-space (/ height number-of-elm)))
-    (setq xoff 0.0)
+	 (height-space (/ height number-of-elm))
+	 (xoff 0.0)
+	 (yoff 0.0)
+	 (r (* 255 (perlin-noise-reference xoff yoff zoff))))
     (dotimes (x number-of-elm)
-      (setq yoff 0.0)
+      (setf yoff 0.0)
       (setf xoff (+ 0.1 xoff))
       (dotimes (y number-of-elm)
 	(setq r (* 255 (perlin-noise-reference xoff yoff zoff)))
@@ -101,7 +103,7 @@
 	  (rotate r)
 	  (line 0 0 width-space 0)
 	  (pop-matrix)))
-      (setf zoff (+ 0.001 zoff)))))
+      (setf zoff (+ 0.0001 zoff)))))
 
 (defsketch art
     ((title "simple rects")
