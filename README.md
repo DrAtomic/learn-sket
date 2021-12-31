@@ -10,15 +10,16 @@ I've always wanted to do generative art so I'm gonna use this.
 
 # Dependencies
 
-I had to downgrade(kindof) sbcl because some dependencies no longer work. I'm using version 2.0.11.
-get all the [[https://github.com/vydd/sketch#installation][sketch]] dependencies.
-
-this project requires [[https://www.quicklisp.org/beta/][quicklisp]] so go ahead and get that. As a side note quicklisp is really cool 
+get all the [sketch](https://github.com/vydd/sketch#installation) dependencies.
 
 # Usage
 
+I learned about [Roswell](https://github.com/roswell/roswell) and I think I'm gonna use it for everything from now on.
+This package can be downloaded and installed via roswell. It will even take care of the sbcl version issue! 
+
 ```bash
-git clone git@github.com:DrAtomic/learn-sketch.git ~/quicklisp/local-projects/learn-sketch
-sbcl
+ros install sbcl/2.0.11
+ros install DrAtomic/learn-sketch
+ros run
 (ql:quickload "cl-art")
 ```
