@@ -14,10 +14,28 @@
     :initform (vector 0 0)
     :accessor acc)))
 
-(setf p1 (make-instance 'particle :pos (vector 1 1)))
-(pos p1)
+(defgeneric update (particle)
+  (:documentation "update particle stuff"))
 
-(defmethod greet (obj)
-  (format t "you are a ~a.~&" (type-of obj)))
+(defgeneric apply-force (particle force)
+  (:documentation "apply force to the particle"))
 
-(greet p1)
+(defgeneric show (particle)
+  (:documentation "draws the particle"))
+
+(defmethod update ((obj particle))
+  (setf (slot-value obj 'pos) (add-vec (pos obj) (vel obj)))
+  (setf (slot-value obj 'vel) (add-vec (vel obj) (acc obj)))
+  (setf (slot-value obj 'acc) #(0 0)))
+
+(defmethod apply-force ((obj particle) force)
+  (setf (slot-value obj 'acc) (add-vec (acc obj) force)))
+
+(defmethod show ((obj particle))
+  (with-pen (make-pen :stroke +red+ :weight 1)
+    (point (svref (pos obj) 0) (svref (pos obj) 1))))
+
+(defun add-vec (vec1 vec2)
+  (vector (+ (svref vec1 0) (svref vec2 0))
+	  (+ (svref vec1 1) (svref vec2 1))))
+
