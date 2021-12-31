@@ -7,4 +7,5 @@
   :serial t
   :depends-on (#:sketch)
   :components ((:file "package")
+	       (:file "noise")
                (:file "cl-art")))
