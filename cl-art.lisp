@@ -10,6 +10,7 @@
 	a)))
 
 (sb-ext:defglobal zoff 0.0)
+(sb-ext:defglobal p1 (make-instance 'particle :pos #(100 300)))
 
 (defun make-grid (width height number-of-elm)
   (let* ((width-space (/ width number-of-elm))
@@ -29,7 +30,10 @@
 	  (rotate r)
 	  (line 0 0 width-space 0)
 	  (pop-matrix)))
-      (setf zoff (+ 0.0001 zoff)))))
+      (setf zoff (+ 0.0001 zoff))
+      (update p1)
+      (setf (pos p1) #(400 400))
+      (show p1))))
 
 (defsketch art
     ((title "simple rects")
