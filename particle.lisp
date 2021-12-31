@@ -32,10 +32,9 @@
   (setf (slot-value obj 'acc) (add-vec (acc obj) force)))
 
 (defmethod show ((obj particle))
-  (with-pen (make-pen :stroke +red+ :weight 1)
-    (point (svref (pos obj) 0) (svref (pos obj) 1))))
+  (with-pen (make-pen :stroke +red+ :weight 10)
+    (circle (svref (pos obj) 0) (svref (pos obj) 1) 10)))
 
 (defun add-vec (vec1 vec2)
   (vector (+ (svref vec1 0) (svref vec2 0))
 	  (+ (svref vec1 1) (svref vec2 1))))
-

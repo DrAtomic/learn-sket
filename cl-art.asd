@@ -8,4 +8,5 @@
   :depends-on (#:sketch)
   :components ((:file "package")
 	       (:file "noise")
+	       (:file "particle")
                (:file "cl-art")))
