@@ -83,7 +83,7 @@
 	(+ a (* PI 2.0))
 	a)))
 
-(setf zoff 0.0)
+(sb-ext:defglobal zoff 0.0)
 
 (defun make-grid (width height number-of-elm)
   (let* ((width-space (/ width number-of-elm))
