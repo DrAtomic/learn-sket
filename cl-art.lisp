@@ -2,17 +2,17 @@
 
 (in-package #:cl-art)
 
-(defun angle (x1 y1 x2 y2)
-  "gets the angle from a line"
-  (let ((a (atan (- y2 y1) (- x2 x1))))
-    (if (< a 0)
-	(+ a (* PI 2.0))
-	a)))
-
 (sb-ext:defglobal zoff 0.0)
-(sb-ext:defglobal p1 (make-instance 'particle :pos #(100 300)))
 
-(defun make-grid (width height number-of-elm)
+(defun make-particles (number-of-particles)
+  (loop :for i :below number-of-particles
+	:collect (make-instance 'particle)))
+
+(defun print-particles (particles)
+    (loop :for i :in particles
+	  :do (print (pos i))))
+
+(defun make-grid (width height number-of-elm particles)
   (let* ((width-space (/ width number-of-elm))
 	 (height-space (/ height number-of-elm))
 	 (xoff 0.0)
@@ -31,16 +31,20 @@
 	  (line 0 0 width-space 0)
 	  (pop-matrix)))
       (setf zoff (+ 0.0001 zoff))
-      (update p1)
-      (setf (pos p1) #(400 400))
-      (show p1))))
+      (let ((diff 0))
+	(loop :for i :in particles
+	      :do (setf (svref (pos i) 0) (+ diff 100)
+			(svref (pos i) 1) (+ diff 100))
+		  (setf diff (+ 10 diff))
+		  (show i))))))
 
 (defsketch art
     ((title "simple rects")
      (width 800)
      (height 800))
-  (background (gray 1))
-  (make-grid 800 800 30))
+  (let ((particles (make-particles 8)))
+    (background (gray 1))
+    (make-grid 800 800 30 particles)))
 
 (defmethod setup ((instance art) &key &allow-other-keys)
   (background (gray 1)))
