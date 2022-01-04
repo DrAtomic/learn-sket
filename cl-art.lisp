@@ -2,7 +2,7 @@
 
 (in-package #:cl-art)
 
-(sb-ext:defglobal zoff 0.0)
+(sb-ext:defglobal zoff (random 300))
 
 (defun make-particles (number-of-particles)
   (loop :for i :below number-of-particles
