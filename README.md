@@ -2,6 +2,8 @@
 
 Learning common lisp sketch.
 
+![image](./pictures/example.gif)
+
 # Description
 
 Common lisp is a great programming language despite all the bad parts.
