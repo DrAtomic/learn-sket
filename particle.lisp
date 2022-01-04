@@ -12,7 +12,11 @@
    (acc
     :initarg :acc
     :initform (vector 0 0)
-    :accessor acc)))
+    :accessor acc)
+   (max-speed
+    :initarg :max-speed
+    :initform 4
+    :accessor max-speed)))
 
 (defgeneric update (particle)
   (:documentation "update particle stuff"))
@@ -32,6 +36,8 @@
 (defmethod update ((obj particle))
   (setf (slot-value obj 'pos) (add-vec (pos obj) (vel obj)))
   (setf (slot-value obj 'vel) (add-vec (vel obj) (acc obj)))
+  (if (> (magnitude (slot-value obj 'vel)) (slot-value obj 'max-speed))
+      (setf (slot-value obj 'vel) (set-magnitude (vel obj) (max-speed obj))))
   (setf (slot-value obj 'acc) #(0 0)))
 
 (defmethod apply-force ((obj particle) force)
@@ -59,3 +65,14 @@
 (defun add-vec (vec1 vec2)
   (vector (+ (svref vec1 0) (svref vec2 0))
 	  (+ (svref vec1 1) (svref vec2 1))))
+
+(defun magnitude (vec)
+  (let ((x (svref vec 0))
+	(y (svref vec 1)))
+    (sqrt (+ (* x x) (* y y)))))
+
+(defun set-magnitude (vec new-mag)
+  (let ((x (svref vec 0))
+	(y (svref vec 1))
+	(old-mag (magnitude vec)))
+    (vector (* x (/ new-mag old-mag)) (* y (/ new-mag old-mag)))))
